@@ -3,10 +3,32 @@
   <el-header style="height:100px">物联网管理平台</el-header>
   <el-container>
     <el-aside width="200px">
-      <Aside></Aside>
+      <el-menu
+      default-active="1"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose">
+      <el-menu-item index="1">
+        <i class="el-icon-menu"></i>
+        <span slot="title">
+        <router-link to="/">产品</router-link>
+      </span>
+      </el-menu-item>
+      
+      <el-menu-item index="2">
+        <i class="el-icon-menu"></i>
+        <span slot="title">
+        <router-link to="/deviceshow">设备</router-link>   
+      </span>
+      </el-menu-item>
+      
+   
+    </el-menu>
     </el-aside>
     <el-container>
-      <el-main>Main</el-main>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
       <el-footer style="height:30px">Footer</el-footer>
     </el-container>
   </el-container>
@@ -14,7 +36,7 @@
 </template>
 
 <script>
-import Aside from './components/aside'
+
 export default {
   name: 'app',
   data () {
@@ -22,8 +44,16 @@ export default {
       msg: 'Welcome to Your Vue.js App'
     }
   },
+  methods:{
+    handleOpen(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleClose(key, keyPath) {
+        console.log(key, keyPath);
+      }
+  },
   components:{
-    Aside
+  
   }
 }
 </script>
@@ -60,7 +90,7 @@ export default {
     background-color: #E9EEF3;
     color: #333;
     text-align: center;
-    line-height: 160px;
+    line-height: 20px;
   }
   
   body > .el-container {

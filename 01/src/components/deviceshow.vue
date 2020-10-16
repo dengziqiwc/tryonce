@@ -26,13 +26,13 @@
 		      width="100">
 		      <template slot-scope="scope">
 		        <el-button @click="handleClick(scope.row)" type="text" size="small" :cc="scope.row">
-		        	<router-link to="/devicedetail">查看</router-link>
+		        	查看
 		        </el-button>
 		      </template>
 		    </el-table-column>
 		  </el-table>
 
-		  <table>
+		  <!-- <table class="table table-hover">
 		  	<tr>
 		  		<th>id</th>
 		  		<th>devicename</th>
@@ -44,30 +44,35 @@
 		  		<td>{{value}}</td>
 		  		
 		  	</tr>
-		  	<tr v-for="item in tableData">
+		  	<!-- <tr v-for="item in tableData">
 		  		<td>{{item.pk}}</td>
 		  		<td>{{item.devicename}}</td>
 		  		<td>{{item.devicesecret}}</td>
 		  		<td>{{item.productname}}</td>
 		  		<td><router-link :to="`/deviceshow/devicedetail/${item.pk}/${item.productname}`">查看</router-link></td>
 		  	</tr>
-		  </table>
+		  </table> --> 
 	</div>
 </template>
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css'
+import $ from 'jquery'
 	export default{
 		name:'deviceshow',
 		data(){
 			return{
 
-					tableData:null
+					tableData:null,
+					
 			}
 		},
 		methods:{
 			handleClick(row) {
-				alert(111)
+			
         	console.log(row);
-      }
+        	this.$router.push({name:'detail',params:{id:row.pk,pkey:row.devicename}})
+      		},
+      		
 		},
 		mounted(){
 
@@ -76,8 +81,16 @@
 				that.cc = res
 				if(that.cc.data.code = 1){
 					that.tableData = that.cc.data.data
+					console.log(that.tableData,typeof(that.tableData))
 				}
 			})
+			
+			// console.log('fffffffffffffff')
+			//  $.each(that.tableData,function(key,val){
+   //     //回调函数有两个参数,第一个是元素索引,第二个为当前值
+			//     console.log(key,val)
+			// });
+
 		}
 	}
 </script>
